@@ -1,3 +1,11 @@
-<li>
-  <%= link_to event.name, event %>
+<li id="event-<%= event.id %>">
+  <span class="content">
+    <%= link_to event.name, event %>
+  </span>
+  <span class="user">
+    Hosted by <%= link_to event.creator.name, event.creator %>
+  </span>
+  <span class="timestamp">
+    Starts in <%= distance_of_time_in_words_to_now(event.date) %>.
+  </span>
 </li>

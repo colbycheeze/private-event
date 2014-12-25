@@ -1,6 +1,11 @@
 <% provide(:title, "Profile for #{@user.name}") %>
-<h1>Events for <%= @user.name %></h1>
-<% @user.events.each do |event| %>
-  <ol><%= event.name %></ol>
-  <ol><%= event.date %></ol>
-<% end %>
+<div class="row">
+  <div class="col-md-8">
+    <h1>
+     <%= @user.name %> is attending <%= @user.attended_events.count %> events
+    </h1>
+    <ol class="microposts">
+      <%= render @user.attended_events %>
+    </ol>
+  </div>
+</div>

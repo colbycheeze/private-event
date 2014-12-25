@@ -1,4 +1,21 @@
 <% provide(:title, "Event") %>
-<h1><%= @event.name %></h1>
-<p><%= @event.creator.name %></p>
-<p><%= @event.date %></p>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= @event.name %>
+      </h1>
+       <p>by <%= link_to @event.creator.name, @event.creator %></p>
+       <p><%= @event.date %></p>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <% if @event.attendees.any? %>
+      <h3>Attendees (<%= @event.attendees.count %>)</h3>
+      <ol class="microposts">
+        <%= render  partial: "users/user", collection: @attendees %>
+      </ol>
+      <%= will_paginate @attendees %>
+    <% end %>
+  </div>
+</div>
