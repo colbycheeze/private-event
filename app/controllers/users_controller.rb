@@ -4,15 +4,21 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
-    @user = User.new(user_params)
-    if @user.save
-      flash[:success] = "User #{@user.name} created."
+    @user = User.find_by(email: user_params[:email])
+    if @user.nil?
+      @user = User.new(user_params)
+      if @user.save
+        flash[:success] = "User #{@user.name} created."
+        log_in @user
+        redirect_to @user
+      else
+        flash.now[:error] = "Oops! Something went wrong."
+        render :new
+      end
+    else 
       log_in @user
+      flash[:success] = "Log in success."
       redirect_to @user
-    else
-      flash.now[:error] = "Oops! Something went wrong."
-      render :new
     end
   end
 
