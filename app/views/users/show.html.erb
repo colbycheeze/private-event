@@ -1,0 +1,6 @@
+<% provide(:title, "Profile for #{@user.name}") %>
+<h1>Events for <%= @user.name %></h1>
+<% @user.events.each do |event| %>
+  <ol><%= event.name %></ol>
+  <ol><%= event.date %></ol>
+<% end %>
